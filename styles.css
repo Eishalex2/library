@@ -1,0 +1,51 @@
+ul {
+  list-style-type: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: paleturquoise;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+  justify-content: space-evenly;
+}
+
+header h1 {
+  justify-self: center;
+}
+
+.info-wrapper ul {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+}
+
+.info-wrapper li {
+  border: 1px solid black;
+  padding: 10px;
+  margin-right: 20px;
+  width: 110px;
+  text-align: center;
+}
+
+.content {
+  display: grid;
+  padding: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background-color: pink;
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
