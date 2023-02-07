@@ -1,3 +1,5 @@
+const content = document.querySelector('.content');
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -7,17 +9,24 @@ function Book(title, author, pages, read) {
   this.read = read
 }
 
+//Adds books to the myLibrary array
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
+  displayBook();
 }
 
+//diplays books on the page. Remove every card 
 function displayBook() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => content.removeChild(card));
+
   for (let book of myLibrary) {
     createBookCard(book);
   }
 }
 
+//Attaches books to the DOM
 function createBookCard(book) {
   const bookCard = document.createElement('div')
   const title = document.createElement('p')
@@ -29,7 +38,13 @@ function createBookCard(book) {
   title.textContent = `${book.title}`
   author.textContent = `By: ${book.author}`
   pages.textContent = `${book.pages} pages`
+
+  bookCard.appendChild(title);
+  bookCard.appendChild(author);
+  bookCard.appendChild(pages);
+
+  content.appendChild(bookCard);
 }
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 297, true);
-displayBook();
+addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 297, true);
+addBookToLibrary('February', 'March', 300, false);
