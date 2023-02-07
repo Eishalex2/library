@@ -40,16 +40,25 @@ function createBookCard(book) {
   const titlePara = document.createElement('p')
   const authorPara = document.createElement('p')
   const pagesPara = document.createElement('p')
+  const readBtn = document.createElement('button')
 
   bookCard.classList.add('card')
 
   titlePara.textContent = `${book.title}`
   authorPara.textContent = `By: ${book.author}`
   pagesPara.textContent = `${book.pages} pages`
+  if (book.read === true) {
+    readBtn.textContent = 'Finished! Mark Unread?';
+    bookCard.style.backgroundColor = 'pink';
+  } else {
+    readBtn.textContent = 'Unread. Mark as Read?';
+    bookCard.style.backgroundColor = '#ddd'
+  }
 
   bookCard.appendChild(titlePara);
   bookCard.appendChild(authorPara);
   bookCard.appendChild(pagesPara);
+  bookCard.appendChild(readBtn);
 
   content.appendChild(bookCard);
 }
