@@ -47,13 +47,26 @@ function createBookCard(book) {
   titlePara.textContent = `${book.title}`
   authorPara.textContent = `By: ${book.author}`
   pagesPara.textContent = `${book.pages} pages`
-  if (book.read === true) {
-    readBtn.textContent = 'Finished! Mark Unread?';
+
+  if (book.read) {
+    readBtn.textContent = 'Finished! Mark unread?';
     bookCard.style.backgroundColor = 'pink';
   } else {
-    readBtn.textContent = 'Unread. Mark as Read?';
+    readBtn.textContent = 'Unread. Mark as read?';
     bookCard.style.backgroundColor = '#ddd'
   }
+
+  readBtn.addEventListener('click', (e)=> {
+    if (book.read) {
+      e.target.textContent = 'Unread. Mark as Read?';
+      bookCard.style.backgroundColor = '#ddd';
+      book.read = false;
+    } else {
+      e.target.textContent = 'Finished! Mark unread?';
+      bookCard.style.backgroundColor = 'pink';
+      book.read = true;
+    }
+  });
 
   bookCard.appendChild(titlePara);
   bookCard.appendChild(authorPara);
