@@ -2,10 +2,12 @@ const content = document.querySelector('.content');
 const addBookBtn = document.querySelector('.new-book');
 const formDiv = document.querySelector('.add-book-form');
 const submitBtn = document.querySelector('button[type=submit]');
+
 let title = document.getElementById('title');
 let author = document.getElementById('author');
 let pages = document.getElementById('pages');
 let read = document.getElementById('read');
+let currentIndex = 0;
 
 let myLibrary = [];
 
@@ -41,13 +43,18 @@ function createBookCard(book) {
   const authorPara = document.createElement('p')
   const pagesPara = document.createElement('p')
   const readBtn = document.createElement('button')
+  const removeBtn = document.createElement('button')
 
   bookCard.classList.add('card')
+  //removeBtn.setAttribute('data-index', currentIndex)
+  bookCard.setAttribute('data-index', currentIndex)
+  currentIndex += 1;
 
   titlePara.textContent = `${book.title}`
   authorPara.textContent = `By: ${book.author}`
   pagesPara.textContent = `${book.pages} pages`
 
+  //sets initial readBtn text content and card color
   if (book.read) {
     readBtn.textContent = 'Finished! Mark unread?';
     bookCard.style.backgroundColor = 'pink';
@@ -56,6 +63,13 @@ function createBookCard(book) {
     bookCard.style.backgroundColor = '#ddd'
   }
 
+  removeBtn.textContent = 'Remove from Library';
+  // removeBtn.addEventListener('click', (e)=> {
+  //   const index = e.target.parentNode.data;
+  //   console.log(index)
+  // })
+
+  //changes book read status on readBtn click
   readBtn.addEventListener('click', (e)=> {
     if (book.read) {
       e.target.textContent = 'Unread. Mark as Read?';
@@ -72,6 +86,7 @@ function createBookCard(book) {
   bookCard.appendChild(authorPara);
   bookCard.appendChild(pagesPara);
   bookCard.appendChild(readBtn);
+  bookCard.appendChild(removeBtn);
 
   content.appendChild(bookCard);
 }
