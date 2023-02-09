@@ -7,7 +7,6 @@ let title = document.getElementById('title');
 let author = document.getElementById('author');
 let pages = document.getElementById('pages');
 let read = document.getElementById('read');
-let currentIndex = 0;
 
 let myLibrary = [];
 
@@ -22,6 +21,7 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
+  
   displayBook();
 }
 
@@ -46,9 +46,7 @@ function createBookCard(book) {
   const removeBtn = document.createElement('button')
 
   bookCard.classList.add('card')
-  //removeBtn.setAttribute('data-index', currentIndex)
-  bookCard.setAttribute('data-index', currentIndex)
-  currentIndex += 1;
+  bookCard.setAttribute('data-index', myLibrary.indexOf(book))
 
   titlePara.textContent = `${book.title}`
   authorPara.textContent = `By: ${book.author}`
@@ -89,6 +87,11 @@ function createBookCard(book) {
   bookCard.appendChild(removeBtn);
 
   content.appendChild(bookCard);
+
+  removeBtn.addEventListener('click', ()=> {
+    myLibrary.splice(bookCard.dataset.index, 1)
+    displayBook();
+  })
 }
 
 addBookBtn.addEventListener('click', ()=> {
@@ -106,7 +109,12 @@ submitBtn.addEventListener('click', (e)=> {
   e.preventDefault();
   addBookToLibrary(title.value, author.value, pages.value, read.value);
   formDiv.style.display = 'none';
+  title.value = '';
+  author.value = '';
+  pages.value = '';
+  read.checked = false;
 })
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 297, true);
-addBookToLibrary('February', 'March', 300, false);
+addBookToLibrary('The Hobbit', 'Bilbo Baggins', 297, true);
+addBookToLibrary('How Beautiful We Were', 'Thula', 100, false);
+addBookToLibrary('Hippity Hoppity', 'Rabbit', 80, true);
