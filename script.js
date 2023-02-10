@@ -7,6 +7,8 @@ let title = document.getElementById('title');
 let author = document.getElementById('author');
 let pages = document.getElementById('pages');
 let read = document.getElementById('read');
+let total = document.getElementById('total');
+let completed = document.getElementById('unread');
 
 let myLibrary = [];
 
@@ -62,10 +64,6 @@ function createBookCard(book) {
   }
 
   removeBtn.textContent = 'Remove from Library';
-  // removeBtn.addEventListener('click', (e)=> {
-  //   const index = e.target.parentNode.data;
-  //   console.log(index)
-  // })
 
   //changes book read status on readBtn click
   readBtn.addEventListener('click', (e)=> {
