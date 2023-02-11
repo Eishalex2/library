@@ -8,7 +8,12 @@ let author = document.getElementById('author');
 let pages = document.getElementById('pages');
 let read = document.getElementById('read');
 let total = document.getElementById('total');
-let completed = document.getElementById('unread');
+let completed = document.getElementById('completed');
+let unread = document.getElementById('unread');
+
+let totalCount = 0;
+let completedCount = 0;
+let unreadCount = 0;
 
 let myLibrary = [];
 
@@ -76,6 +81,7 @@ function createBookCard(book) {
       bookCard.style.backgroundColor = 'pink';
       book.read = true;
     }
+    getStats();
   });
 
   bookCard.appendChild(titlePara);
@@ -89,7 +95,10 @@ function createBookCard(book) {
   removeBtn.addEventListener('click', ()=> {
     myLibrary.splice(bookCard.dataset.index, 1)
     displayBook();
+    getStats();
   })
+
+  getStats();
 }
 
 addBookBtn.addEventListener('click', ()=> {
@@ -112,6 +121,29 @@ submitBtn.addEventListener('click', (e)=> {
   pages.value = '';
   read.checked = false;
 })
+
+function getStats() {
+// reset counters
+  totalCount = 0
+  completedCount = 0
+  unreadCount = 0
+
+//update counters
+  totalCount = myLibrary.length
+  for (book of myLibrary) {
+    if (book.read) {
+      completedCount += 1;
+    } else {
+      unreadCount +=1;
+    }
+  }
+
+  //add to page
+  total.textContent = "Total Books: " + totalCount;
+  completed.textContent = "Read: " + completedCount;
+  unread.textContent = "Unread: " + unreadCount;
+}
+
 
 addBookToLibrary('The Hobbit', 'Bilbo Baggins', 297, true);
 addBookToLibrary('How Beautiful We Were', 'Thula', 100, false);
