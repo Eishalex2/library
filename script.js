@@ -156,5 +156,3 @@ function getStats() {
 
 
 addBookToLibrary('The Hobbit', 'Bilbo Baggins', 297, true);
-addBookToLibrary('How Beautiful We Were', 'Thula', 100, false);
-addBookToLibrary('Hippity Hoppity', 'Rabbit', 80, true);
