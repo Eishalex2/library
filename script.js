@@ -55,6 +55,8 @@ function createBookCard(book) {
   bookCard.classList.add('card')
   bookCard.setAttribute('data-index', myLibrary.indexOf(book))
 
+  removeBtn.classList.add('remove-btn')
+
   titlePara.textContent = `${book.title}`
   authorPara.textContent = `By: ${book.author}`
   pagesPara.textContent = `${book.pages} pages`
@@ -62,9 +64,13 @@ function createBookCard(book) {
   //sets initial readBtn text content and card color
   if (book.read) {
     readBtn.textContent = 'Finished! Mark unread?';
+    readBtn.classList.add('read-btn');
+    readBtn.style.backgroundColor = '#86efac';
     bookCard.style.backgroundColor = 'pink';
   } else {
     readBtn.textContent = 'Unread. Mark as read?';
+    readBtn.classList.add('unread-btn');
+    readBtn.style.backgroundColor = '#fde68a'
     bookCard.style.backgroundColor = '#ddd'
   }
 
@@ -76,10 +82,14 @@ function createBookCard(book) {
       e.target.textContent = 'Unread. Mark as Read?';
       bookCard.style.backgroundColor = '#ddd';
       book.read = false;
+      readBtn.setAttribute('class', 'unread-btn');
+      // readBtn.style.backgroundColor = '#fde68a';
     } else {
       e.target.textContent = 'Finished! Mark unread?';
       bookCard.style.backgroundColor = 'pink';
       book.read = true;
+      readBtn.setAttribute('class', 'read-btn');
+      // readBtn.style.backgroundColor = '#86efac';
     }
     getStats();
   });

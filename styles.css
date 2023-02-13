@@ -1,3 +1,8 @@
+:root {
+  --read-btn-background-color: #4ade80;
+  --unread-btn-background-color: #fcd34d;
+}
+
 ul {
   list-style-type: none;
 }
@@ -71,6 +76,7 @@ button[type="submit"]:active {
 
 .card p:first-child {
   font-weight: bold;
+  text-decoration: underline;
 }
 
 body {
@@ -84,15 +90,22 @@ body {
   transform: translate(-50%, -50%);
   z-index: 1;
   background-color: lightblue;
-  padding: 20px 0;
+  padding: 20px;
   border-radius: 20px;
   display: none;
 }
 
 .add-book-form h3 {
-  margin-bottom: 10px;
   font-size: 2rem;
   text-align: center;
+  margin-bottom: 5px;
+}
+
+.add-book-form h4 {
+  text-align: center;
+  font-weight: 500;
+  color: red;
+  margin-bottom: 10px;
 }
 
 .add-book-form ul {
@@ -106,6 +119,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 5px;
   justify-items: center;
+  align-items: center;
 }
 
 label[for="title"],
@@ -121,6 +135,8 @@ input[type="text"],
 input[type="number"] {
   line-height: 1.5rem;
   padding: 8px 8px 8px 15px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 button[type="submit"] {
@@ -131,13 +147,53 @@ button[type="submit"] {
 }
 
 input[type="text"] {
-  width: 300px;
+  width: 110%;
+}
+
+input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
+button[type="submit"]:focus-visible {
+  outline: none;
+  border: 2px solid purple;
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid purple;
 }
 
 input[type="number"] {
   width: 100px;
 }
 
+input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+}
+
 label {
   font-size: 1.5rem;
+}
+
+.read-btn,
+.unread-btn,
+.remove-btn {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+}
+
+.read-btn:hover {
+  background-color: var(--read-btn-background-color) !important;
+}
+
+.unread-btn:hover {
+  background-color: var(--unread-btn-background-color) !important;
+}
+
+.remove-btn:hover {
+  background-color: #ddd;
+}
+
+button {
+  cursor: pointer;
 }
