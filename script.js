@@ -83,13 +83,13 @@ function createBookCard(book) {
       bookCard.style.backgroundColor = '#ddd';
       book.read = false;
       readBtn.setAttribute('class', 'unread-btn');
-      // readBtn.style.backgroundColor = '#fde68a';
+      readBtn.style.backgroundColor = '#fde68a';
     } else {
       e.target.textContent = 'Finished! Mark unread?';
       bookCard.style.backgroundColor = 'pink';
       book.read = true;
       readBtn.setAttribute('class', 'read-btn');
-      // readBtn.style.backgroundColor = '#86efac';
+      readBtn.style.backgroundColor = '#86efac';
     }
     getStats();
   });
