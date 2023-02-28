@@ -17,11 +17,24 @@ let unreadCount = 0;
 
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  //diplays books on the page. Remove every card before adding them all
+//back to prevent duplicates.
+  displayBook() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => content.removeChild(card));
+  
+    for (let book of myLibrary) {
+      createBookCard(book);
+    }
+  }
 }
 
 //Adds books to the myLibrary array
@@ -29,18 +42,7 @@ function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
   
-  displayBook();
-}
-
-//diplays books on the page. Remove every card before adding them all
-//back to prevent duplicates.
-function displayBook() {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => content.removeChild(card));
-
-  for (let book of myLibrary) {
-    createBookCard(book);
-  }
+  newBook.displayBook();
 }
 
 //Attaches books to the DOM
@@ -83,13 +85,13 @@ function createBookCard(book) {
       bookCard.style.backgroundColor = '#ddd';
       book.read = false;
       readBtn.setAttribute('class', 'unread-btn');
-      // readBtn.style.backgroundColor = '#fde68a';
+      readBtn.style.backgroundColor = '#fde68a';
     } else {
       e.target.textContent = 'Finished! Mark unread?';
       bookCard.style.backgroundColor = 'pink';
       book.read = true;
       readBtn.setAttribute('class', 'read-btn');
-      // readBtn.style.backgroundColor = '#86efac';
+      readBtn.style.backgroundColor = '#86efac';
     }
     getStats();
   });
@@ -104,7 +106,7 @@ function createBookCard(book) {
 
   removeBtn.addEventListener('click', ()=> {
     myLibrary.splice(bookCard.dataset.index, 1)
-    displayBook();
+    book.displayBook();
     getStats();
   })
 
