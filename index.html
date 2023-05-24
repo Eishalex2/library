@@ -22,29 +22,26 @@
   </header>
 
   <div class="add-book-form">
-    <form action="">
+    <form action="" novalidate>
       <h3>Enter your book info!</h3>
       <h4>All fields required</h4>
       <ul>
-        <li>
-          <label for="title">Title of Book</label>
-          <input type="text" name="title" id="title">
-        </li>
-        <li>
-          <label for="author">Author of Book</label>
-          <input type="text" name="author" id="author">
-        </li>
-        <li>
-          <label for="pages"># of Pages</label>
-          <input type="number" name="pages" id="pages">
-        </li>
-        <li>
-          <label for="read">Read?</label>
-          <input type="checkbox" name="read" id="read">
-        </li>
-        <li>
-          <button type="submit">Add book!</button>
-        </li>
+        <label for="title">Title of Book</label>
+        <input type="text" name="title" id="title" required>
+        <span class="error" aria-live="polite"></span>
+
+        <label for="author">Author of Book</label>
+        <input type="text" name="author" id="author" required>
+        <span class="error" aria-live="polite"></span>
+
+        <label for="pages"># of Pages</label>
+        <input type="number" name="pages" id="pages" required>
+        <span class="error" aria-live="polite"></span>
+
+        <label for="read">Read?</label>
+        <input type="checkbox" name="read" id="read">
+
+        <button type="submit">Add book!</button>
       </ul>
     </form>
   </div>

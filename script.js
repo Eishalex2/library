@@ -156,3 +156,29 @@ function getStats() {
 
 
 addBookToLibrary('The Hobbit', 'Bilbo Baggins', 297, true);
+
+const titleError = document.querySelector('#title + span.error');
+const authorError = document.querySelector('#author + span.error');
+const pagesError = document.querySelector('#pages + span.error');
+
+// function checkfield(formElement) {
+//   const errorMessage = formElement + 'Error';
+//   console.log(errorMessage);
+//   // if (formElement.validity.valid) {
+
+//   // }
+// }
+
+// title.addEventListener('focusout', () => {
+//   checkfield(title);
+// })
+
+title.addEventListener('focusout', () => {
+  if (title.validity.valid) {
+    titleError.textContent = "";
+    titleError.className = "error";
+  } else {
+    titleError.textContent = "Please enter the book's title."
+    titleError.className = "error active";
+  }
+})
