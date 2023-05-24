@@ -2,6 +2,7 @@ const content = document.querySelector('.content');
 const addBookBtn = document.querySelector('.new-book');
 const formDiv = document.querySelector('.add-book-form');
 const submitBtn = document.querySelector('button[type=submit]');
+const submitError = document.querySelector('button[type=submit] + span');
 
 let title = document.getElementById('title');
 let author = document.getElementById('author');
@@ -119,17 +120,42 @@ document.addEventListener('click', (e)=> {
   e.stopPropagation()
   if (!addBookBtn.contains(e.target) && !formDiv.contains(e.target)) {
     formDiv.style.display = 'none';
+    title.value = "";
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
+
+    // reset error messages
+    submitError.textContent = "";
+    submitError.className = "";
+    titleError.textContent = "";
+    titleError.className = "";
+    title.className = "";
+    authorError.textContent = "";
+    authorError.className = "";
+    author.className = "";
+    pagesError.textContent = "";
+    pagesError.className = "";
+    pages.className = "";
   }
 })
 
 submitBtn.addEventListener('click', (e)=> {
   e.preventDefault();
-  addBookToLibrary(title.value, author.value, pages.value, read.value);
-  formDiv.style.display = 'none';
-  title.value = '';
-  author.value = '';
-  pages.value = '';
-  read.checked = false;
+  if (!title.checkValidity() || !author.checkValidity() || !pages.checkValidity()) {
+    submitError.textContent = 'Please enter all fields (except "Read" if unread)';
+    submitError.className = "active";
+  } else {
+    addBookToLibrary(title.value, author.value, pages.value, read.value);
+    formDiv.style.display = 'none';
+    submitError.textContent = "";
+    submitError.className = "";
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
+  }
+
 })
 
 function getStats() {
@@ -157,28 +183,42 @@ function getStats() {
 
 addBookToLibrary('The Hobbit', 'Bilbo Baggins', 297, true);
 
-const titleError = document.querySelector('#title + span.error');
-const authorError = document.querySelector('#author + span.error');
-const pagesError = document.querySelector('#pages + span.error');
-
-// function checkfield(formElement) {
-//   const errorMessage = formElement + 'Error';
-//   console.log(errorMessage);
-//   // if (formElement.validity.valid) {
-
-//   // }
-// }
-
-// title.addEventListener('focusout', () => {
-//   checkfield(title);
-// })
+const titleError = document.querySelector('#title + span');
+const authorError = document.querySelector('#author + span');
+const pagesError = document.querySelector('#pages + span');
 
 title.addEventListener('focusout', () => {
   if (title.validity.valid) {
     titleError.textContent = "";
-    titleError.className = "error";
+    titleError.className = "";
+    title.className = "";
   } else {
     titleError.textContent = "Please enter the book's title."
-    titleError.className = "error active";
+    titleError.className = "active";
+    title.className = "error";
   }
-})
+});
+
+author.addEventListener('focusout', () => {
+  if (author.validity.valid) {
+    authorError.textContent = "";
+    authorError.className = "";
+    author.className = "";
+  } else {
+    authorError.textContent = "Please enter the book's author."
+    authorError.className = "active";
+    author.className = "error";
+  }
+});
+
+pages.addEventListener('focusout', () => {
+  if (pages.validity.valid) {
+    pagesError.textContent = "";
+    pagesError.className = "";
+    pages.className = "";
+  } else {
+    pagesError.textContent = "Please enter the book's author."
+    pagesError.className = "active";
+    pages.className = "error";
+  }
+});
